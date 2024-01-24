@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
+use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EntrepriseController extends AbstractController
 {
     #[Route('/entreprise', name: 'app_entreprise')]
-    public function index(): JsonResponse
+    public function index(EntrepriseRepository $entrepriseRepository): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/EntrepriseController.php',
+        $entreprises = $entrepriseRepository->findAll();
+
+        return $this->render('entreprise/index.html.twig', [
+            'entreprises' => $entreprises,
         ]);
     }
 }

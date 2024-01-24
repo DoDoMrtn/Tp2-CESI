@@ -20,11 +20,6 @@ class Fournisseur extends Personne
      */
     private $produits;
 
-    public function __construct()
-    {
-        $this->produits = new ArrayCollection();
-    }
-
     public function getNumFournisseur(): ?int
     {
         return $this->NumFournisseur;
@@ -37,12 +32,10 @@ class Fournisseur extends Personne
         return $this;
     }
 
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getProduits(): Collection
+   
+    public function getProduits(): ?Produit
     {
-        return $this->produits;
+        return $this->produits ;
     }
 
     public function addProduit(Produit $produit): self
