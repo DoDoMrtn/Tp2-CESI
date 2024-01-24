@@ -88,6 +88,11 @@ class Produit implements IVendable
     {
         $this->fournisseur = $fournisseur;
 
+        // Ajoutez le produit à la collection du fournisseur
+        if ($fournisseur) {
+            $fournisseur->addProduit($this);
+        }
+
         return $this;
     }
 

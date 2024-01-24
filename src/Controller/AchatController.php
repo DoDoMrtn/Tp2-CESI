@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
+use App\Repository\AchatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AchatController extends AbstractController
 {
     #[Route('/achat', name: 'app_achat')]
-    public function index(): JsonResponse
+    public function index(AchatRepository $achatsRepository): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/AchatController.php',
+        $achats = $achatsRepository->findAll();
+
+        return $this->render('achat/index.html.twig', [
+            'achats' => $achats,
         ]);
     }
 }

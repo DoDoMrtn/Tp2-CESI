@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
+use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ClientController extends AbstractController
 {
     #[Route('/client', name: 'app_client')]
-    public function index(): JsonResponse
+    public function index(ClientRepository $clientRepository): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ClientController.php',
+        $clients = $clientRepository->findAll();
+
+        return $this->render('client/index.html.twig', [
+            'clients' => $clients,
         ]);
     }
 }

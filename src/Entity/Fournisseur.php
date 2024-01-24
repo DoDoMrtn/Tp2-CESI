@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\FournisseurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
@@ -13,10 +16,14 @@ class Fournisseur extends Personne
     private ?int $NumFournisseur = null;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="entreprise")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="fournisseur")
      */
     private $produits;
 
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getNumFournisseur(): ?int
     {
@@ -30,14 +37,32 @@ class Fournisseur extends Personne
         return $this;
     }
 
-    public function getProduits(): ?Produit
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
     {
         return $this->produits;
     }
 
-    public function setProduits(?Produit $produits): self
+    public function addProduit(Produit $produit): self
     {
-        $this->produits = $produits;
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setFournisseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            // définir le propriétaire du côté "fournisseur" à null
+            if ($produit->getFournisseur() === $this) {
+                $produit->setFournisseur(null);
+            }
+        }
 
         return $this;
     }

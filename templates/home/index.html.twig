@@ -1,0 +1,36 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Bienvenue sur le système de gestion</h1>
+
+        <div class="row">
+            <div class="col-md-6" style="display: flex;justify-content: center;">
+                <a href="{{ path('app_salarie') }}" class="btn btn-primary btn-lg btn-block mb-3">Gestion des Salariés</a>
+            </div>
+            <div class="col-md-6" style="display: flex;justify-content: center;">
+                <a href="{{ path('app_client') }}" class="btn btn-success btn-lg btn-block mb-3">Gestion des Clients</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="display: flex;justify-content: center;">
+                <a href="{{ path('app_produit') }}" class="btn btn-warning btn-lg btn-block mb-3">Gestion des Produits</a>
+            </div>
+            <div class="col-md-6" style="display: flex;justify-content: center;">
+                <a href="{{ path('app_achat') }}" class="btn btn-info btn-lg btn-block mb-3">Gestion des Achats</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="display: flex;justify-content: center;">
+                <a href="{{ path('app_fournisseur') }}" class="btn btn-warning btn-lg btn-block mb-3">Gestion des Fournisseurs</a>
+            </div>
+            <div class="col-md-6" style="display: flex;justify-content: center;">
+                <a href="{{ path('app_entreprise') }}" class="btn btn-info btn-lg btn-block mb-3">Gestion des Entreprises</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Achats{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <button onclick="history.back()" class="btn btn-secondary">Retour</button>
+        <h1 class="text-center">Liste des Achats</h1>
+        <div style="width: 800px"></div>
+    </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Num</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for achat in achats %}
+                    <tr>
+                        <td>{{ achat.id }}</td>
+                        <td>{{ achat.numAchat }}</td>
+                        <td>{{ achat.dataAchat|date('d-m-Y') }}</td>
+
+                        <td>
+                            <a href="#" class="btn btn-primary">Éditer</a>
+                            <a href="#" class="btn btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
