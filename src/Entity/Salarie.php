@@ -8,11 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]
 class Salarie extends Personne
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column]
     private ?int $Matricule = null;
 
@@ -24,11 +19,6 @@ class Salarie extends Personne
 
     #[ORM\Column]
     private ?float $Salaire = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getMatricule(): ?int
     {

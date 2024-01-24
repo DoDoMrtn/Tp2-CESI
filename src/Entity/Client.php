@@ -9,10 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client extends Personne
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\Column]
     private ?int $NumClient = null;
@@ -22,10 +18,6 @@ class Client extends Personne
      */
     private $achats;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getNumClient(): ?int
     {

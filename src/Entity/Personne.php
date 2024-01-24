@@ -6,24 +6,27 @@ use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
+/**
+ * @ORM\MappedSuperclass
+ */
 class Personne
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    protected ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Nom = null;
+    protected ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Prenom = null;
+    protected ?string $Prenom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Adresse = null;
+    protected ?string $Adresse = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Tel = null;
+    protected ?string $Tel = null;
 
     public function getId(): ?int
     {

@@ -9,11 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
 class Fournisseur extends Personne
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column]
     private ?int $NumFournisseur = null;
 
@@ -22,10 +17,6 @@ class Fournisseur extends Personne
      */
     private $produits;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getNumFournisseur(): ?int
     {
