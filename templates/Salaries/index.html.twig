@@ -3,26 +3,39 @@
 {% block title %}Liste des Salariés{% endblock %}
 
 {% block body %}
-    <h1>Liste des Salariés</h1>
+    <div class="container mt-4">
+        <h1>Liste des Salariés</h1>
 
-    <table>
-        <tr>
-            <th>Matricule</th>
-            <th>Nom</th>
-            <th>Actions</th>
-        </tr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Departement</th>
+                    <th scope="col">Poste</th>
+                    <th scope="col">Salaire</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for salarie in salaries %}
+                    <tr>
+                        <td>{{ salarie.matricule }}</td>
+                        <td>{{ salarie.nom }}</td>
+                        <td>{{ salarie.prenom }}</td>
+                        <td>{{ salarie.departement }}</td>
+                        <td>{{ salarie.poste }}</td>
+                        <td>{{ salarie.salaire }}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">Éditer</a>
+                            <a href="#" class="btn btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-        {% for salarie in salaries %}
-            <tr>
-                <td>{{ salarie.matricule }}</td>
-                <td>{{ salarie.nom }}</td>
-                <td>
-                    <a>Éditer</a>
-                    <a>Supprimer</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <a>Ajouter un salarié</a>
+        <a href="#" class="btn btn-success">Ajouter un salarié</a>
+    </div>
 {% endblock %}
