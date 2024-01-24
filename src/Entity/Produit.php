@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Interface\IVendable;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Exceptions\ProduitDejaExistanteException;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
-class Produit
+class Produit implements IVendable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,8 +25,18 @@ class Produit
     #[ORM\Column]
     private ?float $Prix = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Fournisseur = null;
+    /**
+     * @ORM\ManyToOne(targetEntity=Fournisseur::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $fournisseur;
+
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     public function getId(): ?int
     {
@@ -66,15 +79,48 @@ class Produit
         return $this;
     }
 
-    public function getFournisseur(): ?string
+    public function getFournisseur(): ?Fournisseur
     {
-        return $this->Fournisseur;
+        return $this->fournisseur;
     }
 
-    public function setFournisseur(string $Fournisseur): static
+    public function setFournisseur(?Fournisseur $fournisseur): self
     {
-        $this->Fournisseur = $Fournisseur;
+        $this->fournisseur = $fournisseur;
 
         return $this;
+    }
+
+    public function vendre()
+    {
+       // Ajoutez ici la logique spécifique à la vente du produit
+        // Par exemple, mettez à jour le stock, générez une facture, etc.
+
+        // Pour cet exemple, affichons simplement un message
+        echo "Le produit {$this->getNom()} a été vendu.\n";
+    }
+
+    private function produitExisteDeja(): bool
+    {
+        // Vérifiez si le produit existe déjà dans la base de données
+        $produitRepository = $this->entityManager->getRepository(Produit::class);
+
+        // Supposons que vous vérifiez l'existence du produit par son identifiant (ID)
+        $produitExistant = $produitRepository->findOneBy(['id' => $this->id]);
+
+        return $produitExistant !== null;
+    }
+
+    public function ajouterProduit(): void
+    {
+        // Vérifiez si le produit existe déjà
+        if ($this->produitExisteDeja()) {
+            throw new ProduitDejaExistanteException("Le produit existe déjà.");
+        }
+
+        // Logique pour ajouter le produit
+        // Supposons que vous utilisez Doctrine ORM pour gérer la persistance
+        $this->entityManager->persist($this);
+        $this->entityManager->flush();
     }
 }

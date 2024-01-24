@@ -45,4 +45,12 @@ class AchatRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findDernierNumeroAchat(): int
+    {
+        return $this->createQueryBuilder('a')
+            ->select('MAX(a.numAchat) as dernierNumeroAchat')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
 }

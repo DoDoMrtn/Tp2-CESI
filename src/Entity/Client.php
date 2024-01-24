@@ -17,8 +17,10 @@ class Client
     #[ORM\Column]
     private ?int $NumClient = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $HistoAchat = [];
+    /**
+     * @ORM\OneToMany(targetEntity=Achat::class, mappedBy="client")
+     */
+    private $achats;
 
     public function getId(): ?int
     {
@@ -37,14 +39,36 @@ class Client
         return $this;
     }
 
-    public function getHistoAchat(): array
+    public function getAchat(): ?Achat
     {
-        return $this->HistoAchat;
+        return $this->achats;
     }
 
-    public function setHistoAchat(array $HistoAchat): static
+    public function setAchat(?Achat $achats): self
     {
-        $this->HistoAchat = $HistoAchat;
+        $this->achats = $achats;
+
+        return $this;
+    }
+
+    public function addAchat(Achat $achat): self
+    {
+        if (!$this->achats->contains($achat)) {
+            $this->achats[] = $achat;
+            $achat->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): self
+    {
+        if ($this->achats->removeElement($achat)) {
+            // set the owning side to null (unless already changed)
+            if ($achat->getClient() === $this) {
+                $achat->setClient(null);
+            }
+        }
 
         return $this;
     }
