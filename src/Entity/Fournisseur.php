@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
-class Fournisseur
+class Fournisseur extends Personne
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,8 +17,10 @@ class Fournisseur
     #[ORM\Column]
     private ?int $NumFournisseur = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $Produits = [];
+    /**
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="entreprise")
+     */
+    private $produits;
 
     public function getId(): ?int
     {
@@ -37,14 +39,14 @@ class Fournisseur
         return $this;
     }
 
-    public function getProduits(): array
+    public function getProduits(): ?Produit
     {
-        return $this->Produits;
+        return $this->produits;
     }
 
-    public function setProduits(array $Produits): static
+    public function setProduits(?Produit $produits): self
     {
-        $this->Produits = $Produits;
+        $this->produits = $produits;
 
         return $this;
     }

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Salariés{% endblock %}
+
+{% block body %}
+    <h1>Liste des Salariés</h1>
+
+    <table>
+        <tr>
+            <th>Matricule</th>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for salarie in salaries %}
+            <tr>
+                <td>{{ salarie.matricule }}</td>
+                <td>{{ salarie.nom }}</td>
+                <td>
+                    <a>Éditer</a>
+                    <a>Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a>Ajouter un salarié</a>
+{% endblock %}
