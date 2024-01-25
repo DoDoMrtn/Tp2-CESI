@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/produit/controller2')]
-class ProduitController2Controller extends AbstractController
+class ProduitController extends AbstractController
 {
     #[Route('/', name: 'app_produit_controller2_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response

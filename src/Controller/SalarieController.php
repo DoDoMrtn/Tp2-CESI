@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/salarie/controller2')]
-class SalarieController2Controller extends AbstractController
+class SalarieController extends AbstractController
 {
     #[Route('/salarie2', name: 'app_salarie_controller2_index', methods: ['GET'])]
     public function index(SalarieRepository $salarieRepository, EntityManagerInterface $entityManager): Response
