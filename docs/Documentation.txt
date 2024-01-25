@@ -1,0 +1,141 @@
+Documentation du Projet
+
+Installation et Configuration
+
+Environnement de Développement
+
+Prérequis
+
+    PHP (version recommandée)
+    Composer (pour la gestion des dépendances PHP)
+    Symfony CLI (pour la gestion des commandes Symfony)
+
+Installation
+
+    Clonez le dépôt depuis GitHub : git clone https://github.com/votre-utilisateur/votre-projet.git
+    Allez dans le répertoire du projet : cd votre-projet
+    Installez les dépendances : composer install
+
+Configuration
+
+    Copiez le fichier .env : cp .env.dist .env
+    Configurez les paramètres spécifiques au projet dans le fichier .env
+
+Base de Données
+
+    Créez la base de données : php bin/console doctrine:database:create
+    Appliquez les migrations : php bin/console doctrine:migrations:migrate
+    Chargez les fixtures si nécessaire : php bin/console doctrine:fixtures:load
+
+Serveur de Développement
+
+    Lancez le serveur Symfony : symfony server:start
+    L'application Symfony devrait maintenant être accessible à l'adresse http://localhost:8000.
+
+Architecture du Projet
+
+L'architecture du projet suit le modèle MVC (Modèle-Vue-Contrôleur) de Symfony.
+
+Modèle (Model) : Représente la couche d'accès aux données, gère la logique métier.
+Vue (View) : Gère l'affichage et l'interface utilisateur.
+Contrôleur (Controller) : Traite les requêtes utilisateur et interagit avec le modèle et la vue.
+
+src/
+|-- Controller/
+|-- Entity/
+|-- Repository/
+|-- Resources/
+    |-- views/
+    |-- public/
+|-- ...
+
+
+Guide d'utilisation des API
+
+Endpoints API
+
+Liste des Salariés
+
+    Endpoint : /api/salaries
+    Méthode : GET
+    Paramètres : Aucun
+    Exemple de Requête : GET /api/salaries
+    Exemple de Réponse :
+
+    [
+    {
+        "id": 1,
+        "nom": "Doe",
+        "prenom": "John",
+        "salaire": 50000
+    },
+    {
+        "id": 2,
+        "nom": "Smith",
+        "prenom": "Jane",
+        "salaire": 60000
+    }
+    ]
+
+Détails d'un Salarié
+
+    Endpoint : /api/salaries/{id}
+    Méthode : GET
+    Paramètres : {id} - Identifiant du Salarié
+    Exemple de Requête : GET /api/salaries/1
+    Exemple de Réponse :
+    {
+    "id": 1,
+    "nom": "Doe",
+    "prenom": "John",
+    "salaire": 50000
+    }
+
+Ajout d'un Nouveau Salarié
+
+    Endpoint : /api/salaries
+    Méthode : POST
+    Paramètres : JSON avec les détails du Salarié
+    Exemple de Requête : POST /api/salaries
+    Exemple de Corps JSON :
+    {
+    "nom": "Doe",
+    "prenom": "John",
+    "salaire": 50000
+    }
+
+    Exemple de réponse : 
+    {
+    "id": 3,
+    "nom": "Doe",
+    "prenom": "John",
+    "salaire": 50000
+    }
+
+
+Mise à Jour d'un Salarié
+
+    Endpoint : /api/salaries/{id}
+    Méthode : PUT
+    Paramètres : {id} - Identifiant du Salarié, JSON avec les mises à jour
+    Exemple de Requête : PUT /api/salaries/1
+    Exemple de Corps JSON :
+    {
+    "salaire": 55000
+    }
+
+    Exemple de Réponse :
+    {
+    "id": 1,
+    "nom": "Doe",
+    "prenom": "John",
+    "salaire": 55000
+    }
+
+Suppression d'un Salarié
+
+    Endpoint : /api/salaries/{id}
+    Méthode : DELETE
+    Paramètres : {id} - Identifiant du Salarié
+    Exemple de Requête : DELETE /api/salaries/1
+    Exemple de Réponse : Statut 204 (Aucun Contenu)
