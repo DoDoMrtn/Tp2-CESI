@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Interface\IVendable;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Exceptions\ProduitDejaExistanteException;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit implements IVendable
@@ -17,12 +18,16 @@ class Produit implements IVendable
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?int $Reference = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
     private ?string $Nom = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\GreaterThan(0)]
     private ?float $Prix = null;
 
     /**

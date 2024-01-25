@@ -3,16 +3,26 @@
 namespace App\Form;
 
 use App\Entity\Client;
+use App\Entity\Salarie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ClientType extends AbstractType
+class Client1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('Nom')
+            ->add('Prenom')
+            ->add('Adresse')
+            ->add('Tel')
             ->add('NumClient')
+            ->add('salarie', EntityType::class, [
+                'class' => Salarie::class,
+'choice_label' => 'id',
+            ])
         ;
     }
 

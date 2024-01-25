@@ -13,6 +13,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Id</th>
                     <th scope="col">Matricule</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
@@ -25,21 +26,22 @@
             <tbody>
                 {% for salarie in salaries %}
                     <tr>
-                        <td>{{ salarie.matricule }}</td>
-                        <td>{{ salarie.nom }}</td>
-                        <td>{{ salarie.prenom }}</td>
-                        <td>{{ salarie.departement }}</td>
-                        <td>{{ salarie.poste }}</td>
-                        <td>{{ salarie.salaire }}</td>
+                        <td>{{ salarie.id }}</td>
+                        <td>{{ salarie.Matricule }}</td>
+                        <td>{{ salarie.Nom }}</td>
+                        <td>{{ salarie.Prenom }}</td>
+                        <td>{{ salarie.Departement }}</td>
+                        <td>{{ salarie.Poste }}</td>
+                        <td>{{ salarie.Salaire }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary">Éditer</a>
-                            <a href="#" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ path('app_salarie_controller2_edit', {'id': salarie.id}) }}" class="btn btn-primary">Éditer</a>
+                            <a href="{{ path('app_salarie_controller2_delete', {'id': salarie.id}) }}" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <a href="#" class="btn btn-success">Ajouter un salarié</a>
+        <a href="{{ path('app_salarie_controller2_new') }}" class="btn btn-success">Ajouter un salarié</a>
     </div>
 {% endblock %}

@@ -29,13 +29,13 @@
                         <td> 0 </td>
                         {% endif %}
                         <td>
-                            <a href="#" class="btn btn-primary">Éditer</a>
-                            <a href="#" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ path('app_fournisseur_controller2_delete', {'id': fournisseur.id}) }}" class="btn btn-primary">Éditer</a>
+                            <a href="{{ path('app_fournisseur_controller2_delete', {'id': fournisseur.id}) }}" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="#" class="btn btn-success">Ajouter un fournisseur</a>
+        <a href="{{ path('app_fournisseur_controller2_new') }}" class="btn btn-success">Ajouter un fournisseur</a>
     </div>
 {% endblock %}

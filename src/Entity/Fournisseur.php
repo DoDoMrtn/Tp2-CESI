@@ -8,11 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
 class Fournisseur extends Personne
 {
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?int $NumFournisseur = null;
 
     /**

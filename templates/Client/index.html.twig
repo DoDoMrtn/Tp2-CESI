@@ -32,14 +32,14 @@
                         <td>{{ client.tel }}</td>
 
                         <td>
-                            <a href="#" class="btn btn-primary">Éditer</a>
-                            <a href="#" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ path('app_salarie_controller2_edit', {'id': client.id}) }}" class="btn btn-primary">Éditer</a>
+                            <a href="{{ path('app_salarie_controller2_delete', {'id': client.id}) }}" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <a href="#" class="btn btn-success">Ajouter un client</a>
+        <a href="{{ path('app_client_controller2_new') }}" class="btn btn-success">Ajouter un client</a>
     </div>
 {% endblock %}

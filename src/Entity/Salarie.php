@@ -4,21 +4,31 @@ namespace App\Entity;
 
 use App\Repository\SalarieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]
 class Salarie extends Personne
 {
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?int $Matricule = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 5)]
+    #[Assert\NotNull]
     private ?int $Departement = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
     private ?string $Poste = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\GreaterThan(0)]
     private ?float $Salaire = null;
+
+    #[ORM\ManyToOne(targetEntity: Personne::class)] // Spécifie la jointure avec l'entité Personne
+    #[ORM\JoinColumn(name: "personne_id", referencedColumnName: "id")] // Utilise la colonne 'personne_id' pour la jointure
+    private ?Personne $personne = null;
 
     public function getMatricule(): ?int
     {
@@ -67,4 +77,21 @@ class Salarie extends Personne
 
         return $this;
     }
+
+    public function getPersonne(): ?Personne
+{
+    return $this->personne;
+}
+
+public function setPersonne(?Personne $personne): self
+{
+    $this->personne = $personne;
+
+    // assurez-vous que l'association est bidirectionnelle
+    if ($personne !== null && $personne->getSalarie() !== $this) {
+        $personne->setSalarie($this);
+    }
+
+    return $this;
+}
 }

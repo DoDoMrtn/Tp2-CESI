@@ -45,4 +45,13 @@ class SalarieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findAllSalarie(Salarie $salarie)
+{
+    $query = $this->createQueryBuilder('s')
+        ->where('s.matricule = :matricule')
+        ->setParameter(":matricule", $salarie->getMatricule());
+
+    return $query->getQuery()->getResult();
+}
 }

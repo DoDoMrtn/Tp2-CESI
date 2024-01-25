@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salarie{% endblock %}
+
+{% block body %}
+    <h1>Salarie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ salarie.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ salarie.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ salarie.Prenom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ salarie.Adresse }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ salarie.Tel }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ salarie.Matricule }}</td>
+            </tr>
+            <tr>
+                <th>Departement</th>
+                <td>{{ salarie.Departement }}</td>
+            </tr>
+            <tr>
+                <th>Poste</th>
+                <td>{{ salarie.Poste }}</td>
+            </tr>
+            <tr>
+                <th>Salaire</th>
+                <td>{{ salarie.Salaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_salarie_controller2_index') }}">back to list</a>
+
+    <a href="{{ path('app_salarie_controller2_edit', {'id': salarie.id}) }}">edit</a>
+
+    {{ include('Salaries/_delete_form.html.twig') }}
+{% endblock %}
