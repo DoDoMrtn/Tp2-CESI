@@ -22,7 +22,6 @@ class SalarieController extends AbstractController
         $queryBuilder->leftJoin('s.personne', 'p');
 
         $query = $queryBuilder->getQuery();
-        dump($query->getResult());
 
         return $this->render('Salaries/index.html.twig', [
             'salaries' => $query->getResult(),
