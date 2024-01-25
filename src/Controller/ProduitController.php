@@ -25,7 +25,7 @@ class ProduitController extends AbstractController
     #[Route('/new', name: 'app_produit_controller2_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $produit = new Produit();
+        $produit = new Produit($entityManager);
         $form = $this->createForm(Produit1Type::class, $produit);
         $form->handleRequest($request);
 
